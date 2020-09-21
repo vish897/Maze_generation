@@ -1,4 +1,4 @@
-# Maze_generation
+# Random Maze Generation
 
 This is the implementation of algorithms to generate a random maze.
 
