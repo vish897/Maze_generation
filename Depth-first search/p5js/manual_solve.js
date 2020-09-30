@@ -1,25 +1,28 @@
 function check_key(){
-	if(keyCode === 80 && keyIsPressed && xprev.length != 0){
-		print("clear")
-		xprev.pop();
-		yprev.pop();
-		stroke(31)
-		line(xcurr, ycurr, xprev[xprev.length -1 ], yprev[yprev.length -1]);
-		xcurr = xprev[xprev.length -1 ];
-		ycurr = yprev[yprev.length -1]
+	if(keyCode === 80 && keyIsPressed){
+		if(xprev.length > 1){
+			print("clear")
+			stroke(255)
+			line(xcurr, ycurr, xprev[xprev.length - 2], yprev[yprev.length - 2]);
+			xcurr = xprev[xprev.length - 2];
+			ycurr = yprev[yprev.length - 2];
+			xprev.pop();
+			yprev.pop();
+		}
 	} else if(keyCode === 67 && keyIsPressed && xprev.length != 0){
 		print("Erase full path");
 		xprev = [];
 		yprev = [];
-		xcurr = w/2;
-		ycurr = w/2;
+		xcurr   = wwall + (wblock/2);
+		ycurr   = wwall + (wblock/2);
 		xprev.push(xcurr);
     	yprev.push(ycurr);
 		clear();
 		background(0);
-		  for(let i=0; i<grid.length; i++){
-		  	grid[i].show();
-		  }
+		for(let i=0; i<grid.length; i++){
+		 	grid[i].show();
+	    }
+
 	} else{
 		if(keyCode === 65 && keyIsPressed){
 			// Left arrow
@@ -42,8 +45,9 @@ function check_key(){
 			ycurr += inc;
 		}
 		let q = is_on_border(xprev[xprev.length -1], yprev[yprev.length -1]);
-		if(q != 1){
-			stroke(255);
+		print(q)
+		if(q == 2){
+			stroke(0, 0, 255);
 			strokeWeight(1.5)
 			line(xprev[xprev.length -1], yprev[yprev.length -1], xcurr, ycurr);
 			xprev.push(xcurr);
@@ -57,31 +61,29 @@ function check_key(){
 
 
 function is_on_border(xp, yp){
-	var cx = floor(xcurr/w);
-	var cy = floor(ycurr/w);
+	let len = wblock + wwall;
+	var cx = floor(xcurr/len);
+	var cy = floor(ycurr/len);
 	var gc = index(cx, cy);
-	var px = floor(xp/w);
-	var py = floor(yp/w);
+	var px = floor(xp/len);
+	var py = floor(yp/len);
 	var gp = index(px, py);
 	if(gp - gc != 0){
 		let cmpx = px - cx;
 		let cmpy = py - cy;
-
-		if((cmpx == 1 || xcurr == (cx + 1)*w) && grid[gp].walls[3] == true){
-			print("here1");
+		if(cmpx == 1  && grid[gp].walls[3] == true){
 			return 1;
-		} else if((cmpx == -1 || xcurr == cx*w) && grid[gp].walls[1] == true){
-			print("here2");
+		} else if(cmpx == -1 && grid[gp].walls[1] == true){
 			return 1;
-		} else if((cmpy == 1 || ycurr == (cy + 1)*w) && grid[gp].walls[0] == true){
-			print("here3");
+		} else if(cmpy == 1 && grid[gp].walls[0] == true){
 			return 1;
-		} else if((cmpy == -1 || ycurr == cy*w) && grid[gp].walls[2] == true){
-			print("here4");
+		} else if(cmpy == -1 && grid[gp].walls[2] == true){
 			return 1;
+		} else{
+			return 2;
 		}
 	} else{
-			return 2;
+		return 2;
 	}
 }
 

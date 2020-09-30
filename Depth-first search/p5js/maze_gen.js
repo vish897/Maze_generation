@@ -7,26 +7,26 @@ class gen{
 	}
 
 	show(){
-		var x = this.x*w;
-		var y = this.y*w;
-		strokeWeight(1.5);
-		stroke(255);
-		if(this.walls[0]){
-			line(x, y, x+w, y);	
+		let x = this.x*(wblock) + (this.x + 1)*(wwall);
+		let y = this.y*(wblock) + (this.y + 1)*(wwall);
+		fill(255);
+		noStroke();
+		if(!this.walls[0]){
+			rect(x, y, wblock, wwall);	
 		}
-		if(this.walls[1]){
-			line(x+w, y, x+w, y+w);
+		if(!this.walls[1]){
+			rect(x+wblock, y, wwall, wblock);
 		}
-		if(this.walls[2]){
-			line(x+w, y+w, x, y+w);
+		if(!this.walls[2]){
+			rect(x, y+wblock, wblock, wwall);
 		}
-		if(this.walls[3]){
-			line(x, y+w, x,y);
+		if(!this.walls[3]){
+			rect(x, y, wwall, wblock);
 		}	
 		if(this.visited){
 			noStroke();
-			fill(51);
-			rect(x, y, w, w);
+			fill(255);
+			rect(x, y, wblock, wblock);
 		}
 	}
 
@@ -58,11 +58,11 @@ class gen{
 	}
 
 	highlight(){
-		var x = this.x*w;
-		var y = this.y*w;
+		let x = this.x*(wblock) + (this.x + 1)*(wwall);
+		let y = this.y*(wblock) + (this.y + 1)*(wwall);
 		noStroke();
-		fill(0,255, 0, 100);
-		rect(x, y, w, w);
+		fill(0, 100, 255);
+		rect(x, y, wblock-1, wblock-1);
 	}
 }
 
