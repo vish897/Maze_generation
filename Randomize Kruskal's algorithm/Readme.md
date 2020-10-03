@@ -1,1 +1,0 @@
-# Randomized Kruskal's algorithm
