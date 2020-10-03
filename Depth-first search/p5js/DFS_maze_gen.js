@@ -4,6 +4,8 @@ class gen{
 		this.y       = temp_y;
 		this.walls   = [true, true, true, true];
 		this.visited = false;
+		let ind      = index(temp_x, temp_y)*4;
+		this.wallnum = [ind , ind + 1, ind + 2, ind + 3];
 	}
 
 	show(){
