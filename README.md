@@ -12,4 +12,4 @@ I have implemented two algorithms till now
 
 I will be uploading more algorithms very soon!
 
-Last upload: 30th september, 2020
+Last upload: 3rd October 2020
