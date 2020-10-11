@@ -1,6 +1,6 @@
 # Random Maze Generation
 
-This is the implementation of algorithms to generate a random maze.
+This is the implementation of different algorithms to generate a random maze.
 
 Algorithms: https://en.wikipedia.org/wiki/Maze_generation_algorithm
 
